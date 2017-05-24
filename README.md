@@ -1,2 +1,2 @@
-# keyword-suggest-react
-Keyword autosuggest react component
+# redux-search-bar
+Keyword autosuggest react component with redux
