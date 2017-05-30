@@ -5,9 +5,9 @@ const SearchList = (props) => {
     const tableClass = props.tableClass;
     var keywordList = null;
     if (keywordArr && keywordArr.length > 0) {
-        keywordList = props.keywordArr.map((keyword) => {
+        keywordList = props.keywordArr.map((keyword, index) => {
             return (
-                <tr key={keyword}><td>{keyword}</td></tr>
+                <tr key={index}><td>{keyword}</td></tr>
             )
         })
     } else {

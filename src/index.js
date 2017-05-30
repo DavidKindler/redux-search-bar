@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import KeywordSuggest from './keyword-suggest';
+import KeywordSuggest from './components/keyword-suggest';
+
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import reducers from './reducers';
+const createStoreWithMiddleware = applyMiddleware()(createStore);
 
 export default class App extends Component {
     render() {
@@ -10,4 +15,12 @@ export default class App extends Component {
     }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// ReactDOM.render(<App />, document.getElementById('root'));
+
+ReactDOM.render(
+  <Provider store={createStoreWithMiddleware(reducers)}>
+    <App />
+  </Provider>
+  , document.getElementById('root'));
+
+// ReactDOM.render(<App/>, document.getElementById('root'));

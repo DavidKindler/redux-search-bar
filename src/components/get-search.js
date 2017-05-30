@@ -19,7 +19,10 @@ export default function getSearch(term) {
     
     const url = `${ROOT_URL}&q=${term}`
     return $.ajax({ url: url, jsonp: "callback", dataType: "jsonp" })
-        .then((response) => response.results.map((data) => data.name))
+        .then((response) => {
+            // console.log ('response',response)
+           return  response.results.map((data) => data.name)
+        })
 
     
 }

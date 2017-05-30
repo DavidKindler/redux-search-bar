@@ -34,7 +34,7 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     contentBase: './',
-    port: 3000,
+    port: 5000,
     headers: { 'Access-Control-Allow-Origin': '*' }
   }
 };

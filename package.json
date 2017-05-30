@@ -15,7 +15,7 @@
   "repository": "git@github.com:DavidKindler/React-Boilerplate-VSCode.git",
   "scripts": {
     "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
+    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test/components",
     "test:watch": "npm run test -- --watch",
     "watch": "webpack --watch ",
     "build": "webpack --config webpack.config.prod.js",
