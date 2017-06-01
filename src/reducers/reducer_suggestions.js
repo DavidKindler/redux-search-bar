@@ -33,11 +33,13 @@ function getSuggestions(term) {
 //     ]
 // }
 
-export default function(state = null, action) {
-console.log ('Action',action)
-console.log ('state',state)
+export default function(state = [{name: ''}], action) {
+
     switch (action.type) {
         case 'GET_SUGGESTION':
+            console.log('reducer_suggestion, GET_SUGGESTION action ==>', action)
+            console.log('reducer_suggestion, GET_SUGGESION state ==>', state)
+            // break;    
             return [
                 { name: 'kinetis' },
                 { name: 'kinetis design studio' },
@@ -47,9 +49,6 @@ console.log ('state',state)
             ]
     }
 
-    // return state;
-    return [
-        { name: 'WTF' },
-        { name: '????' }
-    ];
+    return state;
+    // return [{ name: '' } ];
 }

@@ -24,6 +24,9 @@ class SuggestionList extends Component {
     }  
 
     render() {
+        if (!this.props.suggestions) {
+            return <div>No suggestions yet</div>
+        }
         return (
             <table className={this.props.tableClass}>
                 <tbody >

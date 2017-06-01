@@ -31,13 +31,15 @@ class KeywordSuggest extends Component {
             </div>
                 <div className="col-sm-6">    
                 <h4>redux suggestion list </h4> 
-                <KeywordInput onSearchTermChange={keywordSearch}  />
+                <KeywordInput />      
                 <SuggestionList tableClass="table table-borderd table-condensed table-hover" />
             </div>
         </div>
         );
     }
 }
+
+// <KeywordInput onSearchTermChange={keywordSearch} /> 
 
 export default KeywordSuggest;
 

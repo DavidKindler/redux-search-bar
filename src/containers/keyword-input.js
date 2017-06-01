@@ -12,10 +12,11 @@ class KeywordInput extends Component {
     }    
 
     onInputChange(term) {
+        console.log ('term passed into onInput Change', term)
         this.setState({ term: term })
-        this.props.onSearchTermChange(term);
+        // this.props.onSearchTermChange(term);
         this.props.selectSuggestion(term);
-        // this.props.getNewSuggestions(term);
+        this.props.getNewSuggestions(term);
     }    
     
     render() {
@@ -31,7 +32,9 @@ class KeywordInput extends Component {
     }
 
 }
-
+// onMouseEnter = { event => this.props.selectSuggestion(this.state.term) }
+// onMouseEnter={event => this.props.selectSuggestion(event.target.value)}
+                    
 function mapStateToProps(state) {
     return {
         activeSuggestion: state.activeSuggestion
