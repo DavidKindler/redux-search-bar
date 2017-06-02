@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { selectSuggestion } from '../actions/action_set_active_suggestion';
-import { getNewSuggestions } from '../actions/action_get_new_suggestions';
+import { getSuggestions } from '../actions/action_suggestions';
 import { bindActionCreators } from 'redux';
 
 class KeywordInput extends Component {
@@ -12,11 +12,9 @@ class KeywordInput extends Component {
     }    
 
     onInputChange(term) {
-        console.log ('term passed into onInput Change', term)
         this.setState({ term: term })
-        // this.props.onSearchTermChange(term);
         this.props.selectSuggestion(term);
-        this.props.getNewSuggestions(term);
+        this.props.getSuggestions(term);
     }    
     
     render() {
@@ -32,9 +30,7 @@ class KeywordInput extends Component {
     }
 
 }
-// onMouseEnter = { event => this.props.selectSuggestion(this.state.term) }
-// onMouseEnter={event => this.props.selectSuggestion(event.target.value)}
-                    
+
 function mapStateToProps(state) {
     return {
         activeSuggestion: state.activeSuggestion
@@ -44,7 +40,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch){
     return bindActionCreators({
         selectSuggestion: selectSuggestion,
-        getNewSuggestions: getNewSuggestions
+        getSuggestions: getSuggestions,
     }, dispatch);
 }
 

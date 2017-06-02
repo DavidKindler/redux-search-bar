@@ -10,7 +10,6 @@ class SuggestionList extends Component {
     }
     
     renderList() {
-        // console.log(this.props.suggestions)
         return this.props.suggestions.map((suggestion, index) => {
             return (
                 <tr
