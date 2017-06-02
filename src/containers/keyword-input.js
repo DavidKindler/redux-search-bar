@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectSuggestion } from '../actions/action_set_active_suggestion';
+import { selectSuggestion } from '../actions/action_select_suggestion';
 import { getSuggestions } from '../actions/action_suggestions';
 import { bindActionCreators } from 'redux';
 

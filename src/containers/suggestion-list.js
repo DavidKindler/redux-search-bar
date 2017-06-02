@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectSuggestion } from '../actions/action_set_active_suggestion';
+import { selectSuggestion } from '../actions/action_select_suggestion';
 import { bindActionCreators } from 'redux';
 
 class SuggestionList extends Component {
@@ -23,9 +23,9 @@ class SuggestionList extends Component {
     }  
 
     render() {
-        if (!this.props.suggestions) {
-            return <div>No suggestions yet</div>
-        }
+        // if (!this.props.suggestions) {
+        //     return <div>No suggestions yet</div>
+        // }
         return (
             <table className={this.props.tableClass}>
                 <tbody >

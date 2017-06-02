@@ -7,7 +7,6 @@ import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger'
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
-// import { requestSuggestions } from './actions/action_request_suggestions';
 import { requestSuggestions, receiveSuggestions, getSuggestions } from './actions/action_suggestions';
 
 

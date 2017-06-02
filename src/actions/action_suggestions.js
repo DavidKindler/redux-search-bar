@@ -1,4 +1,5 @@
 import axios from 'axios';
+const ROOT_URL = `https://desolate-stream-50260.herokuapp.com/proxy?url=http://www.nxp.com/suggest?max=10&site=nxp_en&client=nxp_search_all_results&format=rich`
 
 export function requestSuggestions(activeSuggestion) {
     return {
@@ -15,12 +16,11 @@ export function receiveSuggestions(newSuggestions) {
     }
 }
 
-const ROOT_URL = `https://desolate-stream-50260.herokuapp.com/proxy?url=http://www.nxp.com/suggest?max=10&site=nxp_en&client=nxp_search_all_results&format=rich`
 
 export function getSuggestions(term) {
     const url = `${ROOT_URL}&q=${term}`
 
-  // Thunk middleware knows how to handle functions.
+  // We use Thunk middleware to handle functions such as API calls.
   // It passes the dispatch method as an argument to the function,
   // thus making it able to dispatch actions itself.
 
@@ -34,8 +34,7 @@ export function getSuggestions(term) {
     // The function called by the thunk middleware can return a value,
     // that is passed on as the return value of the dispatch method.
 
-    // In this case, we return a promise to wait for.
-    // This is not required by thunk middleware, but it is convenient for us.
+    // In this case, we return a promise to wait for and then dispatch the next action
     return axios.get(url)
         .then(response => response.data.results )
         .then(data => dispatch(receiveSuggestions(data)) )  
