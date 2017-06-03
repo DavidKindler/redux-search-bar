@@ -10,7 +10,7 @@ class SuggestionList extends Component {
     }
     
     renderList() {
-        return this.props.suggestions.map((suggestion, index) => {
+        return this.props.suggestions.data.map((suggestion, index) => {
             return (
                 <tr
                     key={index}
@@ -23,9 +23,6 @@ class SuggestionList extends Component {
     }  
 
     render() {
-        // if (!this.props.suggestions) {
-        //     return <div>No suggestions yet</div>
-        // }
         return (
             <table className={this.props.tableClass}>
                 <tbody >

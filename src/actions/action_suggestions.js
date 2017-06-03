@@ -1,10 +1,10 @@
 import axios from 'axios';
 const ROOT_URL = `https://desolate-stream-50260.herokuapp.com/proxy?url=http://www.nxp.com/suggest?max=10&site=nxp_en&client=nxp_search_all_results&format=rich`
 
-export function requestSuggestions(activeSuggestion) {
+export function requestSuggestions(term) {
     return {
         type: 'REQUEST_SUGGESTIONS',
-        payload: activeSuggestion
+        loading: true
     }
 }
 
@@ -12,7 +12,8 @@ export function requestSuggestions(activeSuggestion) {
 export function receiveSuggestions(newSuggestions) {
     return {
         type: 'RECEIVE_SUGGESTIONS',
-        payload: newSuggestions
+        suggestions: newSuggestions,
+        loading: false
     }
 }
 
@@ -37,7 +38,7 @@ export function getSuggestions(term) {
     // In this case, we return a promise to wait for and then dispatch the next action
     return axios.get(url)
         .then(response => response.data.results )
-        .then(data => dispatch(receiveSuggestions(data)) )  
+        .then(results => dispatch(receiveSuggestions(results)) )  
 
   }
 }

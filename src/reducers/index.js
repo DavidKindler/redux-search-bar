@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import SuggestionReducer from './reducer_suggestions';
+import SuggestionsReducer from './reducer_suggestions';
 import ActiveSuggestionReducer from './reducer_active_suggestion';
 
 const rootReducer = combineReducers({
-    suggestions: SuggestionReducer,
+    suggestions: SuggestionsReducer,
     activeSuggestion: ActiveSuggestionReducer
 });
 
