@@ -1,5 +1,5 @@
 
-export default function (state = { data:[], loading: true}, action) {
+export const SuggestionsReducer =  (state = { data:[], loading: true}, action) => {
 
     switch (action.type) {
         // initial request before API call.  Here we can add a loading icon if needed
