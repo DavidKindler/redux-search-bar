@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.12",
     "react": "^15.5.0",
     "react-dom": "^15.5.0",
     "react-redux": "^5.0.0",
