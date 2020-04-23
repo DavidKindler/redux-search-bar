@@ -1,0 +1,129 @@
+
+*******START RECORDING OF MEETING*******************************
+
+** What is Redux?
+
+Redux is independent of React but it used quite heavily because React does not have application state, only component state.  
+While Redux is helpful in many react apps, it is not necessary.  Dan Abramov, the creator of Redux wrote an article on why you may or may not want to use it in your app.
+
+** Redux Resources
+
+Here are some sites for documentation and video training.  
+In addition, most React tutorials have a section on Redux.
+
+** Redux graphic
+The Redux flow starts with the store which initiates the application state and is then sent to the UI View.
+The UI View may have actions such as buttons, forms, links or timers that update or change the data.
+
+The action is dispatched to a react reducer.  It may be intercepted at this point by middleware, such as an API call or logger.  It is then sent to all reducerc.  Based on the action type the reducer or reducers take the current state return the next state.
+
+** Review of keyword suggest without Redux
+In the previous tutorial we looked at keyword suggest component.
+In this application we are not using Redux. Event handlers and keyword suggestions are passed in as props from parent component.
+
+But this app does not have the hover over feature like the keyword suggestion on our current site. In order to implement that without Redux we would have to add additional event handlers and props that have to passed from the parent component. 
+
+The parent component becomes very tightly coupled to the children and manages the state of the application.
+
+** Setup
+To incorporate Redux into a React app you will need the redux and react-redux packages.
+If you are getting data from an API you will also need a middleware package such as React-thunk or react-promise.  
+
+There are many middleware packages - the link at the bottom has an extensive list of examples.  Of course you can also check out the npm registry as well.
+
+In our app we will use the react-thunk and react-logger middleware.  The react-logger middleware will console log the state every time there is an action.
+
+=== GO TO INDEX.JS
+In this file we see the createStore function that takes our reducers and middleware packages to create the application store.
+
+The store is then provided, using the Provider component to the app.
+
+=== go to keyword-suggest.js
+in this file we see that the parent class does not pass anything to the children except for a classlist in SuggestionList.  The parent does not need to know about the children's component state.
+
+== go to suggestion-list.js
+In this component we have our list of suggestions passed in as a prop (this.props.suggestions).  The function mapStateToProps will map the reduxState (app state) to a component prop state.  In this case we map the reduxStore.suggestions to props.suggestions.  
+Where does the reduxState.suggestion come from?  Remember that our app store is returned from our reducers.
+
+== go to index.js in reducers folder
+In this file we see that all reducers are combined into a RootReducer.  We have two reducers and one of them is the suggestions reducer.
+
+== go to reducer_suggestions.js
+In this file we see what a basic reducer looks like.  It takes the current state, and initializes it if it is not defined) and an action.
+
+Based on the action type we return a new state.  
+Since we have not initiated an action we are returning the initialized state.
+
+** Go to reducers slide
+The important thing to remember is that reducers do not mutate the state.  They return the next state.
+Also - the state is an object tree.  You cannot return functions.  This is where middleware gets into the picture which we will see shortly.
+
+== go to suggestion-list.js
+So now we have our initialized store which is passed in as a props (suggestions)
+We map out the data and assign two eventhandlers for each item, the onMouseOver and onClick.  Since nothing is mapped (empty array) we do not see anything in our suggestion list.
+
+== Go to keyword-input.js
+In this file we have an input field that has two events and a value provided by the store as props.activeSuggestion.  Let's see where that comes from.
+
+== go to reducer_active_suggestion.js
+We see that we our returning a string which has been initalized to an empty string.
+
+== go to keyword-input.js
+The events (onChange and onMouseEnter) are bound to different functions. One is a private function, the other is our first example of an action creator (this.props.selectSuggestion)
+
+We can see at the bottom in the mapDispatchToProps function that dispatch, which we get from Redux, is bound to the action creators selectSuggestion and getSuggestion.
+
+So when the mouse enters the input field the props.selectSuggestion function is called with the local state field (term).  What does this do?  We see that selectSuggestion is an action creator called selectSuggestionAction.  selectSuggestionAction comes from the action_select_suggestion file
+
+== go to action_select_suggestion.js
+This file contains our action creator which returns an action.  In this case our action type is 'SUGGESTION_SELECTED' and our suggestion was passed in as the local state field (term) which is blank at the moment.
+
+** ACTIONS slide
+Actions are plain javascript objects.  They have a type and a payload or information.
+
+** Application state 1
+at this point our application state or redux store looks like this initialized state.
+
+== go to keyword-input.js
+If we start typing something into our input field the onChange event gets fired which runs the private function onInputChange.  
+
+This does three things:  Sets our local state field term to the target.value, runs the selectSuggestion and getSuggestion action creators.
+
+We know that the selectSuggestion action creator dispatches the "Suggestion_selected" action which our activeSuggestionReducer takes and returns to the activeSuggestion key in our reduxStore.  This then gets passed to the input value as this.props.activeSuggestion
+
+What does the getSuggestion action do?
+
+== go to action_suggestions.js
+The getSuggestion action in this file does not return an action.  Instead it returns a function that first dispatches the requestSuggestionsAction, does an API call using axios, which returns a promise and when the promise is resolved it dispatches the receiveSuggestionsAction with the results.
+
+Remember that actions must return the next state.  So what happens here is that the middleware will see that a function is returned, instead of the next state and perform that function for us.
+
+The requestSuggestions action's only function is to change the loading key to true.  We can use this to setup some type of loading indicator in our app.
+
+== go to keyword-suggest.js
+----- uncomment all commented lines
+You can see an example of how this could be used.  The loading flag is available to the whole app so it can be used in any component.
+
+== go to action_suggestions.js
+Once the promise is resolved we dispatch the receiveSuggestions action with our results and change the loading field to false.
+
+** Application state 2
+At this point our redux state may look like this
+
+== go to suggestion-list.js
+Now we have some data in our suggestions object and we can map out the data into our table rows.
+Each table row has two events. one is a simple alert when the cell is clicked on. The other runs the selectSuggestion action with the name of the suggestion. 
+The selectSuggestion action is dispatched to the ActiveSuggestionReducer where the activeSuggestion key in our store is now updated in our input field.
+
+And that is our brief into to Redux!
+
+** Further Reading
+For more information on Redux I've listed a few links you can look at.
+If you want to take a look at this app I have supplied the github link to it.
+
+
+
+
+
+
+
