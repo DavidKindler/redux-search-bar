@@ -50,3 +50,4 @@ typings
 # Ignore sass cass files
 .sass-cache/
 *.css.map
+ppt-notes.txt

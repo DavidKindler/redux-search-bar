@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectSuggestion } from '../actions/action_select_suggestion';
-import { getSuggestions } from '../actions/action_suggestions';
 import { bindActionCreators } from 'redux';
+import { selectSuggestionAction } from '../actions/action_select_suggestion';
+import { getSuggestionsAction } from '../actions/action_suggestions';
 
 class KeywordInput extends Component {
     constructor(props) {
@@ -24,25 +24,30 @@ class KeywordInput extends Component {
                     placeholder="Search..."
                     value={ this.props.activeSuggestion }
                     onChange={event => this.onInputChange(event.target.value)}
-                    onMouseEnter={event => this.props.selectSuggestion(this.state.term)}
+                    onMouseEnter={event => this.props.selectSuggestion(this.state.term)}           
                  />
         );
     }
 
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(reduxState) {
+    //whatever object is returned from app state is setup as component props.
+    // whenever app state changes this container will get updated.
     return {
-        activeSuggestion: state.activeSuggestion
+        // this comes from our active suggestion reducer
+        activeSuggestion: reduxState.activeSuggestion
     }
 }
  
 function mapDispatchToProps(dispatch){
     return bindActionCreators({
-        selectSuggestion: selectSuggestion,
-        getSuggestions: getSuggestions,
+        selectSuggestion: selectSuggestionAction,
+        getSuggestions: getSuggestionsAction,
     }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(KeywordInput);
+// The connection function from react-redux maps the redux state to the component
+// and turns it into a 'container'.
 

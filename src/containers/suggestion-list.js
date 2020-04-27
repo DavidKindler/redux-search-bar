@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectSuggestion } from '../actions/action_select_suggestion';
 import { bindActionCreators } from 'redux';
+import { selectSuggestionAction } from '../actions/action_select_suggestion';
 
 class SuggestionList extends Component {
     constructor(props) {
@@ -17,7 +17,8 @@ class SuggestionList extends Component {
                     onMouseOver={() => this.props.selectSuggestion(suggestion.name)}
                     onClick={() => alert(suggestion.name)}
                 >
-                    <td>{suggestion.name}</td></tr>
+                    <td>{suggestion.name}</td>
+                </tr>
             )
         })
     }  
@@ -33,15 +34,15 @@ class SuggestionList extends Component {
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(reduxState) {
     return {
-        suggestions: state.suggestions,
-        activeSuggestion: state.activeSuggestion
+         // this comes from our suggestions reducer
+        suggestions: reduxState.suggestions
     }
 }
  
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({ selectSuggestion: selectSuggestion }, dispatch);
+    return bindActionCreators({ selectSuggestion: selectSuggestionAction }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SuggestionList);

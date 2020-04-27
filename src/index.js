@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import KeywordSuggest from './components/keyword-suggest';
-
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger'
-import { createStore, applyMiddleware } from 'redux';
+
 import reducers from './reducers';
-import { requestSuggestions, receiveSuggestions, getSuggestions } from './actions/action_suggestions';
+import KeywordSuggest from './components/keyword-suggest';
+
 
 
 const store = createStore(
